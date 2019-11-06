@@ -1,0 +1,5 @@
+# Default ignored files
+.idea
+oxford_dictionary_api_project.iml
+target
+src\test\java\com\spartaglobal\oxford_dictionary_api_project\config

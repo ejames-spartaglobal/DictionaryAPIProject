@@ -5,6 +5,7 @@ import com.spartaglobal.oxford_dictionary_api_project.deserialisers.DictionaryDT
 import com.spartaglobal.oxford_dictionary_api_project.deserialisers.DictionaryDeserialiser;
 import com.spartaglobal.oxford_dictionary_api_project.deserialisers.TestWordDeserialiser;
 import com.spartaglobal.oxford_dictionary_api_project.httpServices.HTTPClient;
+import org.json.simple.JSONArray;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,6 +20,8 @@ public class TestObject {
     private static DictionaryDeserialiser dictionary;
     private static TestWordDeserialiser file;
     private static JsonNode resultsNode;
+    private JsonNode lexical;
+
 //    private File testFile;
 
     @BeforeClass
@@ -45,7 +48,7 @@ public class TestObject {
         JsonNode idNode= dictionary.rootNode.path("id");
         String ans = idNode.toString();
         Assert.assertEquals("\"" + httpClient.word + "\"",ans);
-        System.out.println(idNode.toString());
+        System.out.println(ans);
     }
 
     @Test
@@ -61,8 +64,20 @@ public class TestObject {
 
     @Test
     public void testLexicalEntries(){
-        JsonNode lexical = dictionary.rootNode.path("results").path("lexicalEntries");
-        String lex = lexical.toString();
-        System.out.println(lex);
+            for (JsonNode node: resultsNode) {
+                lexical =node.path("lexicalEntries");
+                String lexicalEntries= lexical.toString();
+                System.out.println(lexicalEntries);
+            }
+    }
+
+    @Test
+    public void testDerivatives(){
+        for (JsonNode node: lexical)
+        {
+            JsonNode derivatives = node.path("derivatives");
+            String derivString= derivatives.toString();
+            System.out.println(derivString);
+        }
     }
 }

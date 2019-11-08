@@ -14,7 +14,7 @@ import java.util.concurrent.Callable;
 public class HTTPClient {
     private CloseableHttpResponse fixerResponse;
     private String fixerEntryJSONString;
-    private String word;
+    public String word;
     private String language;
 
     public HTTPClient(String language,String word) {

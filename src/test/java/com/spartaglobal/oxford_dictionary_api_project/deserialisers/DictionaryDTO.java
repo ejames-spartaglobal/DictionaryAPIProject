@@ -1,5 +1,7 @@
 package com.spartaglobal.oxford_dictionary_api_project.deserialisers;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.spartaglobal.oxford_dictionary_api_project.httpServices.HTTPClient;
 import netscape.javascript.JSObject;
@@ -13,13 +15,17 @@ public class DictionaryDTO {
 
         private String metadata;
 
-        public Map<String,LinkedHashMap> id;
+        public JSONArray id;
 
         private JSONArray results;
 
         private String word;
 
-        public String getMetadata ()
+//        JsonNode id = ;
+
+
+
+    public String getMetadata ()
         {
             return metadata;
         }
@@ -29,12 +35,12 @@ public class DictionaryDTO {
             this.metadata = metadata;
         }
 
-        public Map<String, LinkedHashMap> getId ()
+        public JSONArray getId ()
         {
             return id;
         }
 
-        public void setId (Map<String,LinkedHashMap> id)
+        public void setId (JSONArray id)
         {
             this.id = id;
         }

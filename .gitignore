@@ -3,3 +3,6 @@
 oxford_dictionary_api_project.iml
 target
 src\test\java\com\spartaglobal\oxford_dictionary_api_project\config
+resources
+!/src/test/java/com/spartaglobal/oxford_dictionary_api_project/deserialisers/ResultsDTO.java
+!/src/test/java/com/spartaglobal/oxford_dictionary_api_project/deserialisers/DictionaryDTO.java

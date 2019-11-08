@@ -1,25 +1,16 @@
 package com.spartaglobal.oxford_dictionary_api_project;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.spartaglobal.oxford_dictionary_api_project.deserialisers.DictionaryDTO;
-import com.spartaglobal.oxford_dictionary_api_project.deserialisers.DictionaryDeserialiser;
+import com.spartaglobal.oxford_dictionary_api_project.deserialisers.DictionaryNodeMapper;
 import com.spartaglobal.oxford_dictionary_api_project.deserialisers.TestWordDeserialiser;
 import com.spartaglobal.oxford_dictionary_api_project.httpServices.HTTPClient;
-import org.json.simple.JSONArray;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.FileReader;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public class TestObject {
     private static HTTPClient httpClient=new HTTPClient("en-gb/","house");
-    private static DictionaryDeserialiser dictionary;
-    private static TestWordDeserialiser file;
-    private static JsonNode resultsNode;
+    private static DictionaryNodeMapper dictionary;
     private JsonNode lexical;
 
 //    private File testFile;
@@ -27,13 +18,7 @@ public class TestObject {
     @BeforeClass
     public static void setup(){
         httpClient.executeEntryGetRequest();
-        dictionary=new DictionaryDeserialiser(httpClient.getFixerEntryJSONString());
-        resultsNode=dictionary.rootNode.path("results");
-
-//        file=new TestWordDeserialiser("resources/word.json");
-//        File testFile=new File("resources/word.json");
-
-
+        dictionary=new DictionaryNodeMapper(httpClient.getFixerEntryJSONString());
     }
 
 //    @Test
@@ -49,35 +34,51 @@ public class TestObject {
         String ans = idNode.toString();
         Assert.assertEquals("\"" + httpClient.word + "\"",ans);
         System.out.println(ans);
+        System.out.println(dictionary.rootNode.toString());
     }
 
     @Test
     public void testMetadata(){
-        JsonNode metadataNode=dictionary.rootNode.path("metadata");
-        System.out.println(metadataNode.toString());
+        System.out.println(dictionary.getMetaDataNode().toString());
     }
 
     @Test
     public void testResult(){
-        System.out.println(resultsNode.toString());
+        System.out.println(dictionary.getResultsNode().toString());
     }
 
     @Test
     public void testLexicalEntries(){
-            for (JsonNode node: resultsNode) {
-                lexical =node.path("lexicalEntries");
-                String lexicalEntries= lexical.toString();
-                System.out.println(lexicalEntries);
-            }
+        String lexicalEntries= dictionary.getLexicalEntriesNode().toString();
+        System.out.println(lexicalEntries);
     }
+
 
     @Test
     public void testDerivatives(){
-        for (JsonNode node: lexical)
-        {
-            JsonNode derivatives = node.path("derivatives");
-            String derivString= derivatives.toString();
-            System.out.println(derivString);
+//        System.out.println(lexical.toString());
+        for (JsonNode node:dictionary.getLexicalEntriesNode()){
+                JsonNode derivatives = node.path("derivatives");
+                String derivativeString= derivatives.toString();
+                System.out.println(derivativeString);
         }
     }
+
+     @Test
+     public void testEntries(){
+         for (JsonNode node:dictionary.getLexicalEntriesNode()){
+             JsonNode entries = node.path("entries");
+             String entriesString= entries.toString();
+             System.out.println(entriesString);
+         }
+     }
+
+    @Test
+    public void testWord(){
+        JsonNode idNode= dictionary.rootNode.path("id");
+        JsonNode wordNode = dictionary.rootNode.path("word");
+        Assert.assertEquals(idNode,wordNode);
+    }
+
 }
+

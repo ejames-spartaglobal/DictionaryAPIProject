@@ -44,41 +44,47 @@ public class TestObject {
 
     @Test
     public void testResult(){
-        System.out.println(dictionary.getResultsNode().toString());
-    }
+        JsonNode resultsID;
 
-    @Test
-    public void testLexicalEntries(){
-        String lexicalEntries= dictionary.getLexicalEntriesNode().toString();
-        System.out.println(lexicalEntries);
-    }
+        for (JsonNode node : dictionary.getResultsNode()) {
+            resultsID = node.path("id");
 
+            Assert.assertEquals("\"" + httpClient.word + "\"", resultsID.toString());
 
-    @Test
-    public void testDerivatives(){
-//        System.out.println(lexical.toString());
-        for (JsonNode node:dictionary.getLexicalEntriesNode()){
-                JsonNode derivatives = node.path("derivatives");
-                String derivativeString= derivatives.toString();
-                System.out.println(derivativeString);
         }
     }
-
-     @Test
-     public void testEntries(){
-         for (JsonNode node:dictionary.getLexicalEntriesNode()){
-             JsonNode entries = node.path("entries");
-             String entriesString= entries.toString();
-             System.out.println(entriesString);
-         }
-     }
 
     @Test
     public void testWord(){
         JsonNode idNode= dictionary.rootNode.path("id");
-        JsonNode wordNode = dictionary.rootNode.path("word");
+        JsonNode wordNode=dictionary.rootNode.path("word");
         Assert.assertEquals(idNode,wordNode);
     }
 
+//    @Test
+//    public void testLexicalEntries(){
+//        String lexicalEntries= dictionary.getLexicalEntriesNode().toString();
+//        System.out.println(lexicalEntries);
+//    }
+//
+//
+//    @Test
+//    public void testDerivatives(){
+////        System.out.println(lexical.toString());
+//        for (JsonNode node:dictionary.getLexicalEntriesNode()){
+//                JsonNode derivatives = node.path("derivatives");
+//                String derivativeString= derivatives.toString();
+//                System.out.println(derivativeString);
+//        }
+//    }
+
+//     @Test
+//     public void testEntries(){
+//         for (JsonNode node:dictionary.getLexicalEntriesNode()){
+//             JsonNode entries = node.path("entries").path("senses");
+//             String entriesString= entries.toString();
+//             System.out.println(entriesString);
+//         }
+//}
 }
 

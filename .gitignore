@@ -7,3 +7,4 @@ resources
 !/src/test/java/com/spartaglobal/oxford_dictionary_api_project/deserialisers/ResultsDTO.java
 !/src/test/java/com/spartaglobal/oxford_dictionary_api_project/deserialisers/DictionaryDTO.java
 C:\Users\Edward James\Documents\Engineering43\oxford_dictionary_api_project\src\test\java\com\spartaglobal\oxford_dictionary_api_project\config
+!/src/test/java/com/spartaglobal/oxford_dictionary_api_project/config/APIKeyAndID.java

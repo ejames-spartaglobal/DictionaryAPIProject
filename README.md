@@ -1,2 +1,2 @@
 #Oxford Dictionary API Project
-using the Oxford Dictionary API to retrieve
+Creating a Maven project that uses jackson to connect to the Oxford Dictionary API to retrieve data on requested entries. The project utilises JsonNodes to move through the Json tree retrieved

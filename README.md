@@ -27,4 +27,4 @@ I feel like the highlight for my code is how I modularised my code to allow for 
 
 # Areas of Improvement
 
-I focussed on the "Happy" path and I feel I should have also done some tests on alternate paths where there are likely to be bugs.
+I focussed on the "Happy" path and I feel I should have also done some tests on alternate paths where there are likely to be bugs. I want to create more tests that go deeper within the data that can be reusable for other entries.
